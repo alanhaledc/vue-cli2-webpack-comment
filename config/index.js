@@ -82,7 +82,7 @@ module.exports = {
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
     // npm install --save-dev compression-webpack-plugin
-    // 是否开启gzip
+    // 是否开启gzip,开启之前需要安装compression-webpack-plugin
     productionGzip: false,
     // gzip压缩的文件类型
     productionGzipExtensions: ['js', 'css'],
@@ -91,6 +91,7 @@ module.exports = {
     // View the bundle analyzer report after build finishes:
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
+    // 是否生成可视化report，需要设置npm_config_report的布尔值
     bundleAnalyzerReport: process.env.npm_config_report
   }
 }
