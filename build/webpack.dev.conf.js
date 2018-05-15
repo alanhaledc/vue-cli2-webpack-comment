@@ -27,7 +27,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   // 模块
   module: {
     // css配置，使用sourceMap和postcss
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})
   },
   // cheap-module-eval-source-map is faster for development
   // sourceMap配置
@@ -41,8 +41,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // 当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html ？？？
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
-      ],
+        {from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html')}
+      ]
     },
     // 热加载
     hot: true,
@@ -59,7 +59,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // 是否全屏覆盖消息
     overlay: config.dev.errorOverlay
       // 只有出现错误信息时才全屏覆盖，警告信息不覆盖
-      ? { warnings: false, errors: true }
+      ? {warnings: false, errors: true}
       // 关闭（都不覆盖）
       : false,
     // 公共路径
@@ -71,7 +71,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // 与监视有关的选项
     watchOptions: {
       // 轮询：false
-      poll: config.dev.poll,
+      poll: config.dev.poll
     }
   },
   plugins: [
@@ -83,7 +83,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     // 显示热更新模块的名字
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
-    // 在webpack编译出现错误时，跳过错误编译，使得打包后的文件不会包含错误代码
+    // 在webpack编译出现错误时，跳过错误编译，使得编译后的文件不会包含错误代码
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     // html插件，自动引入css和js文件
@@ -115,7 +115,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
  * @type {Promise<any>}
  */
 module.exports = new Promise((resolve, reject) => {
-
   // 默认端口
   portfinder.basePort = process.env.PORT || config.dev.port
   // 获取端口（端口必须是空闲的）
@@ -134,12 +133,12 @@ module.exports = new Promise((resolve, reject) => {
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         // 成功提示信息
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`]
         },
         // 错误提示信息
         onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
+          ? utils.createNotifierCallback()
+          : undefined
       }))
 
       // 返回配置
