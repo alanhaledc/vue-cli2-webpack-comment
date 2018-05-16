@@ -13,7 +13,7 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // html插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// 更好的错误提示插件
+// 友好的错误提示插件
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 // 端口查找库
 const portfinder = require('portfinder')
@@ -75,8 +75,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
-    // 环境设置
+    // 配置全局常量
     new webpack.DefinePlugin({
+      // 全局环境为开发环境
       'process.env': require('../config/dev.env')
     }),
     // 热加载模块插件
@@ -92,7 +93,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       filename: 'index.html',
       // 参照模板
       template: 'index.html',
-      // 是否注入css和js
+      // 是否注入css和js，js放置在body标签中
       inject: true
     }),
     // copy custom static assets
@@ -129,7 +130,7 @@ module.exports = new Promise((resolve, reject) => {
       devWebpackConfig.devServer.port = port
 
       // Add FriendlyErrorsPlugin
-      // 添加更好的消息提示插件
+      // 添加友好的消息提示插件
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         // 成功提示信息
         compilationSuccessInfo: {
