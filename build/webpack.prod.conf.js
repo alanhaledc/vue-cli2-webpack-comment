@@ -48,8 +48,9 @@ const webpackConfig = merge(baseWebpackConfig, {
   // 插件
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
-    // 环境设置
+    // 配置全局常量
     new webpack.DefinePlugin({
+      // 全局环境为生产环境
       'process.env': env
     }),
     // 压缩js
@@ -60,7 +61,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           warnings: false
         }
       },
-      // 是否开启sourceMap
+      // 是否生成sourceMap文件
       sourceMap: config.build.productionSourceMap,
       // 是否开启并行
       parallel: true
@@ -93,7 +94,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: config.build.index,
       // 参考模板
       template: 'index.html',
-      // 是否注入css和js，默认true
+      // 是否注入css和js，js放置在body标签中
       inject: true,
       // 压缩html
       minify: {
@@ -107,7 +108,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      // 模块排序
+      // 模块排序，按dependency顺序引入
       chunksSortMode: 'dependency'
     }),
     // keep module.id stable when vendor modules does not change
@@ -117,8 +118,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     // 作用域提升
     new webpack.optimize.ModuleConcatenationPlugin(),
     // split vendor js into its own file
-    // 抽取公共模块（第三方库）
+    // 提取公共模块
     new webpack.optimize.CommonsChunkPlugin({
+      // 将所有用到的第三方库（node_modules）代码都放入到vendor.js中
       name: 'vendor',
       minChunks (module) {
         // any required modules inside node_modules are extracted to vendor
@@ -133,6 +135,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
+    // 将运行时的代码提取到单独的manifest.js中，防止其影响vendor.js
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: Infinity
@@ -140,6 +143,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // This instance extracts shared chunks from code splitted chunks and bundles them
     // in a separate chunk, similar to the vendor chunk
     // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
+    // 把一些共享模块提取到一个单独的模块app.js中
     new webpack.optimize.CommonsChunkPlugin({
       name: 'app',
       async: 'vendor-async',
@@ -148,7 +152,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
 
     // copy custom static assets
-    // 拷贝插件，拷贝静态文件
+    // 复制插件，复制静态文件
     new CopyWebpackPlugin([
       {
         // 复制的来源文件夹
@@ -174,7 +178,7 @@ if (config.build.productionGzip) {
       asset: '[path].gz[query]',
       // 算法
       algorithm: 'gzip',
-      // 匹配
+      // 匹配需要压缩的文件(根据扩展名)
       test: new RegExp(
         '\\.(' +
         config.build.productionGzipExtensions.join('|') +
