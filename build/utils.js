@@ -23,7 +23,7 @@ exports.assetsPath = function (_path) {
 }
 
 /**
- * css解析器
+ * 配置css解析器
  * @param options
  * @return {{css: *, postcss: *, less: *, sass: *, scss: *, stylus: *, styl: *}}
  */
@@ -70,6 +70,7 @@ exports.cssLoaders = function (options) {
     if (options.extract) {
       return ExtractTextPlugin.extract({
         use: loaders,
+        // 没有被提取时使用vue-style-loader
         fallback: 'vue-style-loader'
       })
     } else {
@@ -91,7 +92,7 @@ exports.cssLoaders = function (options) {
 
 // Generate loaders for standalone style files (outside of .vue)
 /**
- * 生成输出
+ * 生成rules
  * @param options
  * @return {Array}
  */
