@@ -5,8 +5,12 @@
 // 执行node和npm版本检查
 require('./check-versions')()
 
-// 设置node环境为production
-process.env.NODE_ENV = 'production'
+// 设置node的环境，或者其他的参数
+process.env = {
+  NODE_ENV: 'production'
+  // 可视化报告
+  // npm_config_report: true
+}
 
 // 动画库
 const ora = require('ora')
