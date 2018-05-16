@@ -11,9 +11,9 @@ module.exports = {
   dev: {
 
     // Paths
-    // 文件夹
+    // 静态资源文件夹
     assetsSubDirectory: 'static',
-    // 公共路径
+    // 公共路径（CDN地址或者服务器地址）
     assetsPublicPath: '/',
     // 代理
     proxyTable: {},
@@ -61,9 +61,9 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
-    // 路径
+    // 输出路径
     assetsRoot: path.resolve(__dirname, '../dist'),
-    // 文件夹
+    // 静态资源文件夹
     assetsSubDirectory: 'static',
     // 公共路径
     assetsPublicPath: '/',
