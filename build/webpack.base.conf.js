@@ -84,7 +84,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          // 小于10000byte，转换为base64格式，否则使用file-loader解析
+          // 小于10000byte，转换为base64格式，减少请求次数，否则使用file-loader解析
           limit: 10000,
           // 文件名
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
