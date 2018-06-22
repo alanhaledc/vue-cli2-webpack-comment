@@ -24,6 +24,7 @@ function resolve(dir) {
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
+  // 预处理：先用eslint-loader预处理代码格式，后面再用babel-loader,vue-loader编译
   enforce: 'pre',
   include: [resolve('src'), resolve('test')],
   options: {
@@ -60,8 +61,10 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     // 别名
     alias: {
+      // 指定完整的ES Module的vue版本
+      // 注意runtime版本没有编译器，无法编译template模板
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      '@': resolve('src')
     }
   },
   // 模块
@@ -72,6 +75,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
+        // 导入vue-loader配置
         options: vueLoaderConfig
       },
       {
