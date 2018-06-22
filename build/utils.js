@@ -67,6 +67,7 @@ exports.cssLoaders = function (options) {
     // Extract CSS when that option is specified
     // (which is the case during production build)
     // 通过传入的参数的extract确定是否需要提取css样式，ExtractTextPlugin需要配置use和fallback
+    // ExtractTextPlugin在webpack4中被弃用
     if (options.extract) {
       return ExtractTextPlugin.extract({
         use: loaders,
@@ -83,6 +84,7 @@ exports.cssLoaders = function (options) {
     css: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less'),
+    // sass-loader会默认处理不基于缩进的 scss 语法，需要配置选项：indentedSyntax
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
     stylus: generateLoaders('stylus'),
