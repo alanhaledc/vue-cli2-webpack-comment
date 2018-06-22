@@ -10,6 +10,9 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  // 带编译器版本，有template和components
   components: { App },
   template: '<App/>'
+  // 不带编译器版本为:
+  // render: h => h(App)
 })
