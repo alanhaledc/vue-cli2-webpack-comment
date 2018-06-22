@@ -18,7 +18,14 @@ module.exports = {
   }),
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,
-  // 转换成require调用
+  // 转换成require调用；当使用这些标签(key)时，(value)使用require来引入
+  // 例如：<img src="../image.png">
+  // 转换成：
+  // createElement('img', {
+  //   attrs: {
+  //     src: require('../image.png')
+  //   }
+  // })
   transformToRequire: {
     video: ['src', 'poster'],
     source: 'src',
