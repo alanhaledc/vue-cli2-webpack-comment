@@ -39,6 +39,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // 消息提示等级（none，info，warnings，error）：警告消息以上才提示
     clientLogLevel: 'warning',
     // 当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html ？？？
+    // 当使用vue-router路由的history模式时，需要指定任意的页面都跳转到编译后的index.html中,不然devServer会无法识别路径
     historyApiFallback: {
       rewrites: [
         {from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html')}
